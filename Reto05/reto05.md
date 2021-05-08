@@ -17,11 +17,11 @@ Para solventarlo, la clave del enunciado es que "hay mucho ruido de navegación"
 
 para ello, abrimos el Wireshark.
 utilizaremos el filtro dns.a y veremos que existen muchas queries dns.
-podemos también hacer un analisis de las queries DNS que nos facilita el propio wireshark de la siguiente fforma, 
-Nos vamos al menú de estadistica y seleccionamos DNS.
+podemos también hacer un analisis de las queries DNS que nos facilita el propio wireshark de la siguiente forma, 
+Nos vamos al menú de estadística y seleccionamos DNS.
 
 En esta nueva ventana que nos abre el wireshark, podemos ver datos sobre el tipo de queryies que se hacen, la longitud de los paquetes etc.
-algo que a la hora de buscar patrones "fuera de lo comun" es la longitud del nombre.
+algo que a la hora de buscar patrones "fuera de lo común" es la longitud del nombre.
 De aquí podemos extraer que el nombre más corto tiene 10 caracteres en la pregunta al DNS en este caso  será a.teads.tv y el más largo contiene 74 caracteres.
 
 como no, wireshark tiene un filtro para esto: 
@@ -31,7 +31,7 @@ dns.qry.name.len == 74  ó  dns.qry.name.len eq 74
 ambos filtraran unas pticiones dns, veamos si es lo que buscamos: 
 
 Seleccionamos el primer paquete y sacamos del menu contextual el valor del la query: 
-
+`
 Frame 6555: 157 bytes on wire (1256 bits), 157 bytes captured (1256 bits) on interface eth0, id 0
 Ethernet II, Src: VMware_63:74:a4 (00:0c:29:63:74:a4), Dst: VMware_f5:3d:ad (00:50:56:f5:3d:ad)
 Internet Protocol Version 4, Src: 192.168.2.135, Dst: 192.168.2.2
@@ -60,9 +60,9 @@ Domain Name System (query)
     Additional records
         <Root>: type OPT
     [Response In: 6556]
+`
 
-
- Nos lo llevamos a la web de cibercheff y vemos que nos da: 
+Nos lo llevamos a la web de cibercheff y vemos que nos da: 
 
 https://gchq.github.io/CyberChef/#recipe=From_Hex('Auto')&input=NDU3Mzc0NjUyMDY2Njk2MzY4NjU3MjZmMjA2NTczMjA2ZDc1NzkyMDY5NmQ3MDZmNzI3NDYxNmU3NDY1LmxvY2FsZ2hvc3QuZXM
 
